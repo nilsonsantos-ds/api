@@ -34,3 +34,18 @@ MongoClient.connect(url, (err, crient) =>{
         console.log("servidor rodando tranquilo")
     })
 })
+
+app.post('/show', (req, res)=> {
+    db.collection('crud').insertone(req.body, (err, result)=>{
+        if(err)return console.log(err)
+        console.log("salvou no nosso banco mongodb")
+        res.redirect('/show')
+        db.collction('crud').find().toarray((err, results) => {
+            console.log(results)
+        })
+    })
+})
+
+app.get('/', (req,  res) => {
+    let cursor = db.collection('crud').find()
+    })
